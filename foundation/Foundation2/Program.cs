@@ -4,111 +4,122 @@ using System.Linq;
 
 public class Address
 {
-    public string StreetAddress { get; private set; }
-    public string City { get; private set; }
-    public string State { get; private set; }
-    public string Country { get; private set; }
+    private string _streetAddress;
+    private string _city;
+    private string _state;
+    private string _country;
 
     public Address(string streetAddress, string city, string state, string country)
     {
-        StreetAddress = streetAddress;
-        City = city;
-        State = state;
-        Country = country;
+        _streetAddress = streetAddress;
+        _city = city;
+        _state = state;
+        _country = country;
     }
 
     public bool IsInUSA()
     {
-        return Country.Equals("USA", StringComparison.OrdinalIgnoreCase);
+        return _country.Equals("USA", StringComparison.OrdinalIgnoreCase);
     }
 
     public string GetFullAddress()
     {
-        return $"{StreetAddress}\n{City}, {State}\n{Country}";
+        return $"{_streetAddress}\n{_city}, {_state}\n{_country}";
     }
 }
 
 public class Customer
 {
-    public string Name { get; private set; }
-    public Address Address { get; private set; }
+    private string _name;
+    private Address _address;
 
     public Customer(string name, Address address)
     {
-        Name = name;
-        Address = address;
+        _name = name;
+        _address = address;
     }
 
     public bool LivesInUSA()
     {
-        return Address.IsInUSA();
+        return _address.IsInUSA();
     }
+
+    public string Name => _name;
+    public Address Address => _address;
 }
 
 public class Product
 {
-    public string Name { get; private set; }
-    public int ProductId { get; private set; }
-    public decimal Price { get; private set; }
-    public int Quantity { get; private set; }
+    private string _name;
+    private int _productId;
+    private decimal _price;
+    private int _quantity;
 
     public Product(string name, int productId, decimal price, int quantity)
     {
-        Name = name;
-        ProductId = productId;
-        Price = price;
-        Quantity = quantity;
+        _name = name;
+        _productId = productId;
+        _price = price;
+        _quantity = quantity;
     }
 
     public decimal TotalCost()
     {
-        return Price * Quantity;
+        return _price * _quantity;
     }
+
+    public string Name => _name;
+    public int ProductId => _productId;
+    public int Quantity => _quantity;
 }
 
 public class Gift
 {
-    public bool IsGift { get; private set; }
-    public string Note { get; private set; }
-    public bool HideDetails { get; private set; }
+    private bool _isGift;
+    private string _note;
+    private bool _hideDetails;
 
     public Gift(bool isGift, string note = "", bool hideDetails = false)
     {
-        IsGift = isGift;
-        Note = note;
-        HideDetails = hideDetails;
+        _isGift = isGift;
+        _note = note;
+        _hideDetails = hideDetails;
     }
+
+    public bool IsGift => _isGift;
+    public string Note => _note;
+    public bool HideDetails => _hideDetails;
 }
 
 public class Order
 {
-    private List<Product> products;
-    public Customer Customer { get; private set; }
-    private const decimal USA_Shipping_Cost = 5.00m;
-    private const decimal International_Shipping_Cost = 35.00m;
+    private List<Product> _products;
+    private Customer _customer;
+    private const decimal _usaShippingCost = 5.00m;
+    private const decimal _internationalShippingCost = 35.00m;
 
     public Order(Customer customer)
     {
-        products = new List<Product>();
-        Customer = customer;
+        _products = new List<Product>();
+        _customer = customer;
     }
 
     public void AddProduct(Product product)
     {
-        products.Add(product);
+        _products.Add(product);
     }
 
     public decimal CalculateTotalCost()
     {
-        decimal totalProductCost = products.Sum(p => p.TotalCost());
-        decimal shippingCost = Customer.LivesInUSA() ? USA_Shipping_Cost : International_Shipping_Cost;
+        decimal totalProductCost = _products.Sum(p => p.TotalCost());
+        decimal shippingCost = _customer.LivesInUSA() ? _usaShippingCost : _internationalShippingCost;
         return totalProductCost + shippingCost;
     }
 
     public string GetPackingLabel(Gift gift = null)
     {
         var label = "Packing Label:\n";
-        foreach (var product in products)
+        foreach (var product in _products)
         {
             if (gift == null || !gift.HideDetails)
             {
@@ -124,7 +135,7 @@ public class Order
 
     public string GetShippingLabel()
     {
-        return $"Shipping Label:\n{Customer.Name}\n{Customer.Address.GetFullAddress()}";
+        return $"Shipping Label:\n{_customer.Name}\n{_customer.Address.GetFullAddress()}";
     }
 }
 
@@ -149,9 +160,22 @@ class Program
 
         Address address = new Address(streetAddress, city, state, country);
         Customer customer = new Customer(customerName, address);
-        
-        Order order = new Order(customer);
-        
+
+        Order order1 = new Order(customer);
+        Order order2 = new Order(customer); // Create a second order for demonstration
+
+        AddProductsToOrder(order1);
+        AddProductsToOrder(order2);
+
+        ProcessGift(order1);
+        ProcessGift(order2);
+
+        DisplayOrderDetails(order1);
+        DisplayOrderDetails(order2);
+    }
+
+    static void AddProductsToOrder(Order order)
+    {
         Console.WriteLine("How many products would you like to add?");
         int productCount = int.Parse(Console.ReadLine());
 
@@ -172,7 +196,10 @@ class Program
             Product product = new Product(productName, productId, price, quantity);
             order.AddProduct(product);
         }
-        
+    }
+
+    static void ProcessGift(Order order)
+    {
         Console.WriteLine("Is this order a gift? (yes/no)");
         string isGiftResponse = Console.ReadLine().ToLower();
         Gift gift = null;
@@ -187,10 +214,16 @@ class Program
             gift = new Gift(true, giftNote, hideDetails);
         }
 
-        decimal totalCost = order.CalculateTotalCost();
-        Console.WriteLine($"\nTotal Cost: ${totalCost}");
-
+        Console.WriteLine($"\nTotal Cost for Order: ${order.CalculateTotalCost()}");
         Console.WriteLine("\n" + order.GetPackingLabel(gift));
+        Console.WriteLine(order.GetShippingLabel());
+    }
+
+    static void DisplayOrderDetails(Order order)
+    {
+        decimal totalCost = order.CalculateTotalCost();
+        Console.WriteLine($"\nTotal Cost for Order: ${totalCost}");
+        Console.WriteLine("\n" + order.GetPackingLabel());
         Console.WriteLine(order.GetShippingLabel());
     }
 }

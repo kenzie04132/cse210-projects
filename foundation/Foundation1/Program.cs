@@ -29,73 +29,76 @@ public class Comment
 public class Video
 {
     public string Title { get; private set; }
-    public string Description { get; private set; }
-    public string Url { get; private set; }
-    public DateTime UploadDate { get; private set; }
-    private List<Comment> comments;
+    public string Author { get; private set; }
+    public TimeSpan Length { get; private set; }
+    private List<Comment> _comments;
 
-    public Video(string title, string description, string url)
+    public Video(string title, string author, TimeSpan length)
     {
         Title = title;
-        Description = description;
-        Url = url;
-        UploadDate = DateTime.Now;
-        comments = new List<Comment>();
+        Author = author;
+        Length = length;
+        _comments = new List<Comment>();
     }
 
     public void AddComment(Comment comment)
     {
-        comments.Add(comment);
+        _comments.Add(comment);
     }
 
     public void RemoveComment(Comment comment)
     {
-        comments.Remove(comment);
+        _comments.Remove(comment);
+    }
+
+    public int GetNumberOfComments()
+    {
+        return _comments.Count;
     }
 
     public List<Comment> GetComments()
     {
-        return comments;
+        return _comments;
     }
 
     public string GetDetails()
     {
-        return $"Title: {Title}\nDescription: {Description}\nURL: {Url}\nUpload Date: {UploadDate}\nComments: {comments.Count}";
+        return $"Title: {Title}\nAuthor: {Author}\nLength: {Length}\nComments: {GetNumberOfComments()}";
     }
 }
 
 public class VideoManager
 {
-    private List<Video> videos;
+    private List<Video> _videos;
 
     public VideoManager()
     {
-        videos = new List<Video>();
+        _videos = new List<Video>();
     }
 
     public void AddVideo(Video video)
     {
-        videos.Add(video);
+        _videos.Add(video);
     }
 
     public void RemoveVideo(Video video)
     {
-        videos.Remove(video);
+        _videos.Remove(video);
     }
 
     public Video GetVideo(string title)
     {
-        return videos.FirstOrDefault(v => v.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
+        return _videos.FirstOrDefault(v => v.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
     }
 
     public List<Video> SearchByTitle(string title)
     {
-        return videos.Where(v => v.Title.Contains(title, StringComparison.OrdinalIgnoreCase)).ToList();
+        return _videos.Where(v => v.Title.Contains(title, StringComparison.OrdinalIgnoreCase)).ToList();
     }
 
     public List<Video> GetVideos()
     {
-        return videos;
+        return _videos;
     }
 }
 
@@ -119,7 +122,7 @@ class Program
         VideoManager videoManager = new VideoManager();
         CommentManager commentManager = new CommentManager();
 
-        Video video1 = new Video("Sample Video", "This is a description.", "http://youtube.com/sample");
+        Video video1 = new Video("Sample Video", "Author1", TimeSpan.FromMinutes(5));
         videoManager.AddVideo(video1);
 
         Comment comment1 = new Comment("Great video!", "User1");

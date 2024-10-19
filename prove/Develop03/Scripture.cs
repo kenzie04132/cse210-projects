@@ -4,15 +4,16 @@ using System.Linq;
 
 public class Scripture
 {
-    public string Reference { get; set; }
-    public string Text { get; set; }
-    private HashSet<int> hiddenWordIndices;
+    public string Reference { get; private set; }
+    public string Text { get; private set; }
+
+    private HashSet<int> _hiddenWordIndices;
 
     public Scripture(string reference, string text)
     {
         Reference = reference;
         Text = text;
-        hiddenWordIndices = new HashSet<int>();
+        _hiddenWordIndices = new HashSet<int>();
     }
 
     public string GetDisplayedText()
@@ -20,7 +21,7 @@ public class Scripture
         var words = Text.Split(' ');
         for (int i = 0; i < words.Length; i++)
         {
-            if (hiddenWordIndices.Contains(i))
+            if (IsWordHidden(i))
             {
                 words[i] = "____"; 
             }
@@ -34,7 +35,7 @@ public class Scripture
         var random = new Random();
 
         var availableIndices = Enumerable.Range(0, words.Length)
-                                          .Where(i => !hiddenWordIndices.Contains(i))
+                                          .Where(i => !IsWordHidden(i))
                                           .ToList();
 
         if (availableIndices.Count == 0)
@@ -43,12 +44,24 @@ public class Scripture
         }
 
         int indexToHide = availableIndices[random.Next(availableIndices.Count)];
-        hiddenWordIndices.Add(indexToHide);
+        HideWordAtIndex(indexToHide);
         return true; 
     }
 
     public bool AllWordsHidden()
     {
-        return hiddenWordIndices.Count == Text.Split(' ').Length;
+        return _hiddenWordIndices.Count == Text.Split(' ').Length;
+    }
+
+    // Encapsulated method to check if a word is hidden
+    private bool IsWordHidden(int index)
+    {
+        return _hiddenWordIndices.Contains(index);
+    }
+
+    // Encapsulated method to hide a word at a specific index
+    private void HideWordAtIndex(int index)
+    {
+        _hiddenWordIndices.Add(index);
     }
 }
