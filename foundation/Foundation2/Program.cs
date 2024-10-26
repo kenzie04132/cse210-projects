@@ -143,74 +143,40 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Enter your name:");
-        string customerName = Console.ReadLine();
-
-        Console.WriteLine("Enter your street address:");
-        string streetAddress = Console.ReadLine();
-
-        Console.WriteLine("Enter your city:");
-        string city = Console.ReadLine();
-
-        Console.WriteLine("Enter your state:");
-        string state = Console.ReadLine();
-
-        Console.WriteLine("Enter your country:");
-        string country = Console.ReadLine();
-
-        Address address = new Address(streetAddress, city, state, country);
+        // Sample Data for Customer
+        string customerName = "John Doe";
+        Address address = new Address("123 Main St", "Anytown", "CA", "USA");
         Customer customer = new Customer(customerName, address);
 
         Order order1 = new Order(customer);
         Order order2 = new Order(customer); // Create a second order for demonstration
 
-        AddProductsToOrder(order1);
-        AddProductsToOrder(order2);
+        // Sample Products
+        AddSampleProductsToOrder(order1);
+        AddSampleProductsToOrder(order2);
 
-        ProcessGift(order1);
-        ProcessGift(order2);
+        // Sample Gift Processing
+        ProcessGift(order1, true, "Happy Birthday!", false);
+        ProcessGift(order2, false);
 
+        // Display Order Details
         DisplayOrderDetails(order1);
         DisplayOrderDetails(order2);
     }
 
-    static void AddProductsToOrder(Order order)
+    static void AddSampleProductsToOrder(Order order)
     {
-        Console.WriteLine("How many products would you like to add?");
-        int productCount = int.Parse(Console.ReadLine());
-
-        for (int i = 0; i < productCount; i++)
-        {
-            Console.WriteLine($"Enter the name of product {i + 1}:");
-            string productName = Console.ReadLine();
-
-            Console.WriteLine("Enter the product ID:");
-            int productId = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Enter the price per unit:");
-            decimal price = decimal.Parse(Console.ReadLine());
-
-            Console.WriteLine("Enter the quantity:");
-            int quantity = int.Parse(Console.ReadLine());
-
-            Product product = new Product(productName, productId, price, quantity);
-            order.AddProduct(product);
-        }
+        // Sample Product Data
+        order.AddProduct(new Product("Laptop", 101, 999.99m, 1));
+        order.AddProduct(new Product("Mouse", 102, 49.99m, 2));
     }
 
-    static void ProcessGift(Order order)
+    static void ProcessGift(Order order, bool isGift, string giftNote = "", bool hideDetails = false)
     {
-        Console.WriteLine("Is this order a gift? (yes/no)");
-        string isGiftResponse = Console.ReadLine().ToLower();
         Gift gift = null;
 
-        if (isGiftResponse == "yes")
+        if (isGift)
         {
-            Console.WriteLine("Enter a gift note:");
-            string giftNote = Console.ReadLine();
-            Console.WriteLine("Hide product details on the package? (yes/no)");
-            string hideDetailsResponse = Console.ReadLine().ToLower();
-            bool hideDetails = hideDetailsResponse == "yes";
             gift = new Gift(true, giftNote, hideDetails);
         }
 
