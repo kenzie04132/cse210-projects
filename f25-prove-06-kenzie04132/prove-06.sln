@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prove-06", "prove-06\prove-06.csproj", "{7D4C2CE1-A713-48F1-8B9E-816364E24DC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test-prove-06", "test-prove-06\test-prove-06.csproj", "{37D6D6EF-6FBA-44FA-A1E4-7BE72A9B7CA2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D4C2CE1-A713-48F1-8B9E-816364E24DC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D4C2CE1-A713-48F1-8B9E-816364E24DC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D4C2CE1-A713-48F1-8B9E-816364E24DC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D4C2CE1-A713-48F1-8B9E-816364E24DC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37D6D6EF-6FBA-44FA-A1E4-7BE72A9B7CA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37D6D6EF-6FBA-44FA-A1E4-7BE72A9B7CA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37D6D6EF-6FBA-44FA-A1E4-7BE72A9B7CA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37D6D6EF-6FBA-44FA-A1E4-7BE72A9B7CA2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
