@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prove-07", "prove-07\prove-07.csproj", "{E661A826-6071-49CB-8346-B6CA8ABFFBA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test-prove-07", "test-prove-07\test-prove-07.csproj", "{660B3B68-A4B2-43DB-A0DC-270A62FAB67F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E661A826-6071-49CB-8346-B6CA8ABFFBA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E661A826-6071-49CB-8346-B6CA8ABFFBA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E661A826-6071-49CB-8346-B6CA8ABFFBA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E661A826-6071-49CB-8346-B6CA8ABFFBA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{660B3B68-A4B2-43DB-A0DC-270A62FAB67F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{660B3B68-A4B2-43DB-A0DC-270A62FAB67F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{660B3B68-A4B2-43DB-A0DC-270A62FAB67F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{660B3B68-A4B2-43DB-A0DC-270A62FAB67F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
