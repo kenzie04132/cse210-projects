@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prove-08", "prove-08\prove-08.csproj", "{75043723-1AD6-4C6B-8154-D5F424FFAC0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test-prove-08", "test-prove-08\test-prove-08.csproj", "{CA8ADC9E-9240-4CE8-BA90-CC614F67FD49}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75043723-1AD6-4C6B-8154-D5F424FFAC0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75043723-1AD6-4C6B-8154-D5F424FFAC0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75043723-1AD6-4C6B-8154-D5F424FFAC0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75043723-1AD6-4C6B-8154-D5F424FFAC0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA8ADC9E-9240-4CE8-BA90-CC614F67FD49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA8ADC9E-9240-4CE8-BA90-CC614F67FD49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA8ADC9E-9240-4CE8-BA90-CC614F67FD49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA8ADC9E-9240-4CE8-BA90-CC614F67FD49}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
